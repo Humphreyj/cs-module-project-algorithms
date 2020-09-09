@@ -5,7 +5,23 @@ Returns: a List of integers
 def sliding_window_max(nums, k):
     # Your code here
 
-    pass
+    if not nums or k < 1 or k > len(nums):
+        return []
+    output = []
+    dq = []
+
+    for i,num in enumerate(nums):
+        if dq and dq[0] < i - k + 1:
+            dq.pop(0)
+        while dq and nums[dq[-1]] < num:
+            dq.pop()
+        dq.append(i)
+
+        if i >= k - 1:
+            output.append(nums[dq[0]])
+# https://www.youtube.com/watch?v=pJ1hGbNRWuA
+    return output
+
 
 
 if __name__ == '__main__':
